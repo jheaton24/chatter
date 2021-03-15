@@ -6,12 +6,9 @@ ruby '3.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
-
-group :production do
-  gem 'pg'
-end
+# Heroku doesn't play well with SQLite3, so
+# we're supposed to use Postgres instead.  ¯\_(ツ)_/¯ 
+gem 'pg'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
