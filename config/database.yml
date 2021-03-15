@@ -29,3 +29,5 @@ test:
 production:
   <<: *default
   database: db/chatter_prod
+  username:
+  password:  <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
