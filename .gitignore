@@ -38,3 +38,15 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore other unneeded files.
+doc/
+*.swp
+*~
+.project
+.DS_Store
+bundler_stubs/
