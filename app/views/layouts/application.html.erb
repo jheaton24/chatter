@@ -8,14 +8,16 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= render 'layouts/shim' %>
   </head>
 
   <body>
-    <p>Welcome, Chatterbox!</p>
-    <%= yield %>
-  </body>
+    <%= render 'layouts/header' %>
 
-  <footer>
-    <h6>&#169; 2021, Imperial Sword <br/>All rights reserved.</h6> 
-  </footer>
+    <div class="container">
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
+  </body>
 </html>
