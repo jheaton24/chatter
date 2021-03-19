@@ -16,12 +16,46 @@ describe "Static pages" do
     it { should have_selector('p', text: "#{footer_text}") }     
     it { should have_title(full_title('')) }
     it { should have_no_title('| Home') }
-    it { should have_link('Home') }
-    it { should have_link('Help') }
-    it { should have_link('Sign In') }
-    it { should have_link('About') }
-    it { should have_link('Contact') }
-    it { should have_link('Sign up now!') }
+  end
+
+  describe "Home page links" do
+    before(:each) { visit root_path }
+    
+    it { 
+      should have_link('Home') 
+      click_link "Home"
+      expect(page).to have_title(full_title(''))
+    }
+
+    it { 
+      should have_link('Help') 
+      click_link "Help"
+      expect(page).to have_title(full_title('Help'))
+    }
+
+    it { 
+      should have_link('Sign In') 
+      click_link "Sign In"
+      expect(page).to have_title(full_title('Sign In'))
+    }
+
+    it { 
+      should have_link('About') 
+      click_link "About"
+      expect(page).to have_title(full_title('About'))
+    }
+
+    it { 
+      should have_link('Contact') 
+      click_link "Contact"
+      expect(page).to have_title(full_title('Contact Us'))
+    }
+
+    it { 
+      should have_link('Sign up now!') 
+      click_link "Sign up now!"
+      expect(page).to have_title(full_title('Sign Up'))
+    }
   end
 
   describe "Help page" do
