@@ -21,6 +21,7 @@ describe "Static pages" do
     it { should have_link('Sign In') }
     it { should have_link('About') }
     it { should have_link('Contact') }
+    it { should have_link('Sign up now!') }
   end
 
   describe "Help page" do
