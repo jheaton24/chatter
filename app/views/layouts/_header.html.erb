@@ -2,12 +2,12 @@
   <header class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container" style="float: right">
-        <%= link_to "Chatter", "#", id: "logo" %>
+        <%= link_to "Chatter", root_path, id: "logo" %>
         <nav>
           <ul class="nav pull-right">
-            <li><%= link_to "Home", 'static_pages/home' %></li>
-            <li><%= link_to "Help", '/static_pages/help' %></li>
-            <li><%= link_to "Sign In", '/static_pages/signIn' %></li>
+            <li><%= link_to "Home", home_path %></li>
+            <li><%= link_to "Help", help_path %></li>
+            <li><%= link_to "Sign In", signIn_path %></li>
           </ul>
         </nav>
       </div>
