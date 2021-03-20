@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :chats
+  has_secure_password
+
   before_save { |user| user.email = email.downcase }
 
   # Name validation: 
@@ -26,6 +29,20 @@ class User < ApplicationRecord
   validates(:username, 
     presence: true,
     uniqueness: { case_sensitive: false }
+  )
+
+  # Password validation:
+  #   Must be non-blank
+  #   Must be at least 6 characters long
+  validates(:password,
+    presence: true,
+    length: { minimum: 6 }
+  )
+  
+  # Password confirmation validation:
+  #   Must be non-blank
+  validates(:password_confirmation,
+    presence: true
   )
 
 end

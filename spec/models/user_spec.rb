@@ -6,7 +6,9 @@ RSpec.describe User, type: :model do
     @user = User.create(
       name: 'Testy Tester',
       email: 'tester@aol.com',
-      username: 'TestyT123'
+      username: 'TestyT123',
+      password: 'foobar',
+      password_confirmation: 'foobar'
     )
   }
 
@@ -16,6 +18,10 @@ RSpec.describe User, type: :model do
     should respond_to(:name)
     should respond_to(:email)
     should respond_to(:username)
+    should respond_to(:password_digest)
+    should respond_to(:password)
+    should respond_to(:password_confirmation)
+    should respond_to(:authenticate)
   }
 
   it { should be_valid }
@@ -94,6 +100,43 @@ RSpec.describe User, type: :model do
         dup_user.save
         expect(dup_user).to be_invalid
       end
+    end
+  end
+
+  # Password tests
+  describe "blank password" do
+    before { @user.password = @user.password_confirmation = ' ' }
+    it { should be_invalid }
+  end
+
+  describe "password <> confirmation" do
+    before { @user.password_confirmation = 'mismatch' } 
+    it { should be_invalid }
+  end
+
+  describe "password confirmation is nil" do
+    before { @user.password_confirmation = nil }
+    it { should be_invalid }
+  end
+
+  describe "password is too short" do
+    before { @user.password = @user.password_confirmation = 'a' * 5 }
+    it { should be_invalid }
+  end
+
+  # Authentication tests
+  describe "return value of authenticate method" do
+    let(:found_user) { User.find_by_email(@user.email) }
+
+    describe "with valid pw" do
+      it { should == found_user.authenticate(@user.password) }
+    end
+
+    describe "with invalid pw" do
+      let(:user_for_invalid_pw) { found_user.authenticate("invalid") }
+
+      specify { expect(user_for_invalid_pw).to_not eq @user }
+      specify { expect(user_for_invalid_pw).to be_falsey }
     end
   end
 end
