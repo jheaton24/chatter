@@ -17,6 +17,14 @@ RSpec.describe "UserPages" do
     it { should have_title(full_title('Sign Up')) }
   end
 
+  describe "profile page" do
+    let(:user) { FactoryBot.create(:user) }
+    before { visit user_path(user) }
+
+    it { should have_selector('h1', text: user.username) }
+    it { should have_title(user.username) }
+  end
+
  # describe "creating invalid users" do
  #   before { visit signup_path }
  #   # we don't have validation yet
