@@ -1,7 +1,7 @@
 <% provide(:title, @user.username ) %>
 <h1>
-  <%= gravatar_for @user %>
   <%= @user.name %>
+  <%= gravatar_for @user.email %>
 </h1>
 
 <p id="notice"><%= notice %></p>
