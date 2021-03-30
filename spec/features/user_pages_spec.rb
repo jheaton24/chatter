@@ -17,6 +17,31 @@ RSpec.describe "UserPages" do
     it { should have_title(full_title('Sign Up')) }
   end
 
+  describe "signup" do
+    before { visit signup_path }
+    let(:submit) { "Create account" }
+
+    describe "with invalid info" do
+      it "should not create a user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+    end
+
+    describe "with valid info" do
+      before do
+        fill_in "Name", with: "Example User"
+        fill_in "Email", with: "user@example.com"
+        fill_in "Username", with: "example_user_1017"
+        fill_in "Password", with: 'foobar'
+        fill_in "Confirmation", with: 'foobar'
+      end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+    end
+  end
+
   describe "profile page" do
     let(:user) { FactoryBot.create(:user) }
     before { visit user_path(user) }
@@ -25,18 +50,4 @@ RSpec.describe "UserPages" do
     it { should have_title(user.username) }
   end
 
- # describe "creating invalid users" do
- #   before { visit signup_path }
- #   # we don't have validation yet
- # end
- #
- # describe "creating valid users" do
- #   before { visit signup_path }
- # 
- #   fill_in 'Name', with: 'Testy Tester'
- #   fill_in 'Email', with: 'test@testytester.com'
- #   fill_in 'UserId', with: 'TestyT123'
- # 
- #   click_on 'Submit'
- # end
 end
